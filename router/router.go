@@ -3,8 +3,8 @@ package router
 import "github.com/gin-gonic/gin"
 
 func Initialize() {
-	router := gin.Default()  // Criar o mecanismo Gin
-	initializeRoutes(router) // Configurar rotas
+	router := gin.Default()  // Create Gin engine
+	initializeRoutes(router) // Configure routes
 
-	router.Run() // Iniciar o servidor
+	router.Run() // Start the server
 }

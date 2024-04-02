@@ -13,12 +13,12 @@ func InitializeSQLlite() (*gorm.DB, error) {
 	logger := GetLogger("sqlite")
 	dbPath := "./db/database_file.db"
 
-	// Verifica se o arquivo do banco de dados existe
+	// Check if the database file exists
 	_, err := os.Stat(dbPath)
 	if os.IsNotExist(err) {
 		logger.Info("Database file not found, creating...")
 
-		// Cria o arquivo e o diretório do banco de dados
+		// Create database and directory
 		err = os.MkdirAll("./db", os.ModePerm)
 		if err != nil {
 			return nil, errors.Wrap(err, "failed to create database directory")
@@ -31,7 +31,7 @@ func InitializeSQLlite() (*gorm.DB, error) {
 		file.Close()
 	}
 
-	// Cria o DB e conecta
+	// Create DB and connect
 	db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
 	if err != nil {
 		logger.Errorf("Failed to initialize SQLite: %v", err)
@@ -40,6 +40,7 @@ func InitializeSQLlite() (*gorm.DB, error) {
 
 	logger.Info("SQLite initialized successfully")
 
+	// Migrate the schemas
 	err = db.AutoMigrate(&schemas.Opening{})
 	if err != nil {
 		logger.Errorf("SQLite auto migration error: %v", err)

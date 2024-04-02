@@ -7,29 +7,29 @@ import (
 	"os"
 )
 
-// Definição do tipo Logger
+// Logger type definition
 type Logger struct {
-	debug   *log.Logger // Logger para mensagens de debug
-	info    *log.Logger // Logger para mensagens de informação
-	warning *log.Logger // Logger para mensagens de aviso
-	err     *log.Logger // Logger para mensagens de erro
-	writer  io.Writer   // Escritor de saída para os loggers
+	debug   *log.Logger // Logger for debug messages
+	info    *log.Logger // Logger for information messages
+	warning *log.Logger // Logger for warning messages
+	err     *log.Logger // Logger for error messages
+	writer  io.Writer   // Output writer for loggers
 }
 
-// Função NewLogger cria uma nova instância de Logger
-// Parâmetro p é o prefixo para os loggers
+// NewLogger function creates a new instance of Logger
+// Parameter p is the prefix for the loggers
 func NewLogger(p string) *Logger {
-	// Define o escritor de saída para o padrão (stdout)
+	// Set the output writer to standard output (stdout)
 	writer := io.Writer(os.Stdout)
-	// Cria um novo logger com o escritor de saída, prefixo e opções de formatação
+	// Create a new logger with output writer, prefix, and formatting options
 	logger := &Logger{
-		debug:   log.New(writer, p+" DEBUG: ", log.Ldate|log.Ltime),   // Logger para mensagens de debug
-		info:    log.New(writer, p+" INFO: ", log.Ldate|log.Ltime),    // Logger para mensagens de informação
-		warning: log.New(writer, p+" WARNING: ", log.Ldate|log.Ltime), // Logger para mensagens de aviso
-		err:     log.New(writer, p+" ERROR: ", log.Ldate|log.Ltime),   // Logger para mensagens de erro
-		writer:  writer,                                               // Define o escritor de saída para o logger
+		debug:   log.New(writer, p+" DEBUG: ", log.Ldate|log.Ltime),   // Logger for debug messages
+		info:    log.New(writer, p+" INFO: ", log.Ldate|log.Ltime),    // Logger for information messages
+		warning: log.New(writer, p+" WARNING: ", log.Ldate|log.Ltime), // Logger for warning messages
+		err:     log.New(writer, p+" ERROR: ", log.Ldate|log.Ltime),   // Logger for error messages
+		writer:  writer,                                               // Set the output writer for the logger
 	}
-	// Retorna a nova instância do logger
+	// Return the new instance of logger
 	return logger
 }
 
